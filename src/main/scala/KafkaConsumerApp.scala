@@ -10,11 +10,11 @@ object KafkaConsumerApp extends App {
   props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer")
   props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer")
   props.put("group.id", "my-group")
-//  props.put("enable.auto.commit", "true")
-//  props.put("auto.commit.interval.ms", "1000")
+  //  props.put("enable.auto.commit", "true")
+  //  props.put("auto.commit.interval.ms", "1000")
 
   val consumer = new KafkaConsumer[String, String](props)
-  consumer.subscribe(List("my-topic").asJava)
+  consumer.subscribe(List("output").asJava)
   while (true) {
     val records = consumer.poll(Duration.ofMillis(100)).asScala
     for (record <- records) {
